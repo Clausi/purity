@@ -1,0 +1,3 @@
+[submodule "phpBattlenetApi"]
+	path = phpBattlenetApi
+	url = git://github.com/Clausi/phpBattlenetApi.git
