@@ -4,6 +4,12 @@ $GuildRegion = "eu";
 $GuildRealm = "anetheron";
 $GuildName = "purity";
 
+// Forum Ids
+$newsForum = 2;
+$applyForum = 2;
+$applyThread = 1;
+$leadGroup = 9;
+
 // DB Prefix
 $DbPrefix = "guild_";
 
