@@ -103,7 +103,6 @@ function convertTimestamp($timestamp) {
 	return $timestamp;
 }
 
-
 // Ränge
 function getRank($rank, $ranks) {
 	if($rank == $ranks['gildenmeister']) return '<strong>Gildenmeister</strong>';
