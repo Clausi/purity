@@ -5,9 +5,6 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-include_once("./gilde/includes/constants.inc.php");
-include_once("./gilde/includes/functions.inc.php");
-
 $query = "SELECT * FROM ". $TableNames['progress'] ." WHERE active = '1' ORDER BY raidid DESC";
 $result = $db->sql_query($query);
 

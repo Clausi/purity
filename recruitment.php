@@ -5,9 +5,6 @@ if (!defined('IN_PHPBB'))
 	exit;
 }
 
-include("./guild/includes/constants.inc.php");
-include("./guild/includes/functions.inc.php");
-
 $Roles = array('tank', 'heal', 'damage');
 
 foreach($Roles as $Role) {
