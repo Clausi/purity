@@ -11,6 +11,7 @@ include($phpbb_root_path . 'guild/includes/wowarmoryapi.' . $phpEx);
 
 $armory = new BattlenetArmory($GuildRegion, $GuildRealm);
 $armory->setLocale($armoryLocale);
+$armory->UTF8(TRUE);
 $guild = $armory->getGuild($GuildName);
 $guildData = $guild->getData();
 
