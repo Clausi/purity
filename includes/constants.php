@@ -3,6 +3,7 @@
 $GuildRegion = "eu";
 $GuildRealm = "anetheron";
 $GuildName = "purity";
+$armoryLocale = 'de_DE';
 
 // Forum Ids
 $newsForum = 2;
@@ -16,7 +17,7 @@ $DbPrefix = "guild_";
 // DB Tabellennamen
 $TableNames = array(
 	'roster' => $DbPrefix."roster",
-	'guild' => $DbPrefix."guild",
+	'guild' => $DbPrefix."info",
 	'achievements' => $DbPrefix."achievements",
 	'perks' => $DbPrefix."perks",
 	'progress' => $DbPrefix."progress",
