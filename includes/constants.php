@@ -42,17 +42,19 @@ $skip = array("Wilder", "Biny");
 $maxExmember = 30;
 
 // Ränge aktuell
-$rank = array();
-$rank['inaktiv'] = 9;
-$rank['friends'] = 8;
-$rank['twink'] = 7;
-$rank['trial'] = 6;
-$rank['member'] = 5;
-$rank['epgp'] = 4;
-$rank['offitwink'] = 3;
-$rank['offi'] = 2;
-$rank['gildenrat'] = 1;
-$rank['gildenmeister'] = 0;
+$ranks = array(
+	'inaktiv' => 9,
+	'friends' => 8,
+	'twink' => 7,
+	'trial' => 6,
+	'member' => 5,
+	'epgp' => 4,
+	'offitwink' => 3,
+	'offi' => 2,
+	'gildenrat' => 1,
+	'gildenmeister' => 0
+);
+
 
 $rerank = array("Sardra" => $rank['friends']);
 

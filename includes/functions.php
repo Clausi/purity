@@ -105,34 +105,43 @@ function convertTimestamp($timestamp) {
 
 
 // Ränge
-function getRang($rang, $raenge) {
-	if($rang == $raenge['gildenmeister'] || $rang == $raenge['gildenrat'] || $rang == $raenge['gildenmama']) return '<b>Gildenrat</b>';
-	switch($rang) {
-		case $raenge['member']:
+function getRank($rank, $ranks) {
+	if($rank == $ranks['gildenmeister'] || $rank == $ranks['gildenrat'] || $rank == $ranks['gildenmama']) return '<strong>Gildenrat</strong>';
+	switch($rank) {
+		case $ranks['member']:
 			return 'Member';
 		break;
-		case $raenge['raidlead']:
-			return '<b>Raidlead</b>';
+		case $ranks['epgp']:
+			return 'Member';
 		break;
-		case $raenge['klassenleiter']:
-			return '<b>Klassenleiter</b>';
+		case $ranks['inaktiv']:
+			return 'Inaktiv';
 		break;
-		case $raenge['initiant']:
+		case $ranks['raidlead']:
+			return '<strong>Raidlead</strong>';
+		break;
+		case $ranks['klassenleiter']:
+			return '<strong>Klassenleiter</strong>';
+		break;
+		case $ranks['initiant']:
 			return 'Initiant';
 		break;
-		case $raenge['offi']:
+		case $ranks['offi']:
 			return 'Offi';
 		break;
-		case $raenge['twink']:
+		case $ranks['twink']:
 			return 'Twink';
 		break;
-		case $raenge['trial']:
+		case $ranks['trial']:
 			return 'Trial';
 		break;
-		case $raenge['friends']:
+		case $ranks['friends']:
 			return 'Friend';
 		break;
-		case $raenge['gildenbank']:
+		case $ranks['offitwink']:
+			return 'Offitwink';
+		break;
+		case $ranks['gildenbank']:
 			return 'Gildenbank';
 		break;
 		default: return 'Unkown';
