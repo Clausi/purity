@@ -216,3 +216,4 @@ pip-log.txt
 
 eu_anetheron_purity.png
 includes/wowarmoryapi/cache/*.*
+!empty
