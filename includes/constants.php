@@ -3,6 +3,7 @@
 $GuildRegion = "eu";
 $GuildRealm = "anetheron";
 $GuildName = "purity";
+$battlenetLocale = 'de';
 $armoryLocale = 'de_DE';
 
 // Forum Ids
