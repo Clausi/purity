@@ -106,7 +106,7 @@ function convertTimestamp($timestamp) {
 
 // Ränge
 function getRank($rank, $ranks) {
-	if($rank == $ranks['gildenmeister'] || $rank == $ranks['gildenrat'] || $rank == $ranks['gildenmama']) return '<strong>Gildenrat</strong>';
+	if($rank == $ranks['gildenmeister']) return '<strong>Gildenmeister</strong>';
 	switch($rank) {
 		case $ranks['member']:
 			return 'Member';
