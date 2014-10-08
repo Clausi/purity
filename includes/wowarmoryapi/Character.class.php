@@ -6,7 +6,7 @@ class Character {
 	private $region;
 	private $realm;
 	private $characterData;
-	private $fields = array('stats','talents','items','reputation','titles','professions','appearance','companions','mounts','achievements','progression','pvp','quests','pets','guild');
+	private $fields = array('stats','talents','items','reputation','titles','professions','appearance','mounts','achievements','progression','pvp','quests','pets','guild','petSlots','audit','feed');
 	private $cache;
 	private $currentTitle;
 	private $race;
@@ -42,6 +42,9 @@ class Character {
 		return TRUE;
    	}
    	
+	/**
+   	 * Returns the primary professions based on wowhead data. Can be slow.
+   	 */
    	public function getPrimaryProfessions(){
    		$professions = $this->characterData['professions']['primary'];
    		$professions_out = $professions;
@@ -360,6 +363,14 @@ class Character {
    		return count($this->characterData['quests']);
    	}
    	
+	/**
+	* Retrieve the characters companions
+	* @return An array with all the character companions ID - Names currently unavailable.
+	*/
+	public function getCompanions(){
+		$data = $this->characterData;
+		return $data['companions'];
+	}
    	
    	/**
    	 * Get the character level

@@ -1,5 +1,4 @@
 <?php
-
 class Races {
 	
 	private $datas;

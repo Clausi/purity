@@ -6,6 +6,6 @@ $GLOBALS['wowarmory']['db']['dbname'] = ''; //Name of your database
 $GLOBALS['wowarmory']['db']['username'] = ''; //Insert your database username
 $GLOBALS['wowarmory']['db']['password'] = ''; //Insert your database password
 // Only use the two below if you have received API keys from Blizzard.
-$GLOBALS['wowarmory']['keys']['private'] = ''; // if you have an API key from Blizzard
-$GLOBALS['wowarmory']['keys']['public'] = ''; // if you have an API key from Blizzard
-include('includes/BattlenetArmory.class.php'); //include the main class 
+$GLOBALS['wowarmory']['keys']['api'] = ''; // You need the api key from Blizzard. dev.battle.net
+$GLOBALS['wowarmory']['keys']['share'] = ''; // Currently unused
+include(dirname(__FILE__) . '/wowarmoryapi/BattlenetArmory.class.php'); //include the main class 

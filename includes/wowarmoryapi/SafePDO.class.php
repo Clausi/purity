@@ -17,7 +17,12 @@ Class SafePDO extends PDO {
             $dbname = $GLOBALS['wowarmory']['db']['dbname'];
             $username = $GLOBALS['wowarmory']['db']['username'];
             $password = $GLOBALS['wowarmory']['db']['password'];
-            $dsn = $driver.':host='.$host.';dbname='.$dbname;
+            if (isset($GLOBALS['wowarmory']['db']['port'])){
+            	$port = $GLOBALS['wowarmory']['db']['port'];
+            	$dsn = $driver.':host='.$adress.';port='.$port.';dbname='.$dbname;
+            } else {
+            	$dsn = $driver.':host='.$host.';dbname='.$dbname;
+            }
             parent::__construct($dsn, $username, $password);
 
             // Change the exception handler back to whatever it was before

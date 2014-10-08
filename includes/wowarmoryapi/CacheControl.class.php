@@ -92,6 +92,7 @@ class CacheControl {
    	
    	public function checkCache($objectID,$table,$fields){
    		$sql = "SELECT Timestamp FROM ".$this->tblpre.$table." WHERE ObjectID = '".$objectID."' LIMIT 1";
+		#print $sql."\n";
    		$timestamp = $this->{$table.'TTL'};
    		$sth = $this->db->query($sql);
    		if ($row = $sth->fetch()){
@@ -101,7 +102,9 @@ class CacheControl {
 					$data = $this->getData($objectID, $table);
 					$data = json_decode($data,TRUE);
 					$fieldsData = explode(',', $fields);
+					#print_r($fieldsData);
 					foreach ($fieldsData as $field){
+						print "field: $field\n";
 						if (!isset($data[$field]) AND !preg_match('/^pets$/',$field) AND !preg_match('/^guild$/',$field)){
 							$return = FALSE;
 						}

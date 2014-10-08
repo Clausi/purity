@@ -2,19 +2,19 @@
 
 class jsonConnect {
 	
-	private $regions				= array('us'=>'us.battle.net',
-											'eu'=>'eu.battle.net',
-											'kr'=>'kr.battle.net',
-											'tw'=>'tw.battle.net',
+	private $regions				= array('us'=>'us.api.battle.net',
+											'eu'=>'eu.api.battle.net',
+											'kr'=>'kr.api.battle.net',
+											'tw'=>'tw.api.battle.net',
 											'cn'=>'battlenet.com.cn');
-	private $characterbaseURL 		= '/api/wow/character/';
-	private $guildbaseURL 			= '/api/wow/guild/';
+	private $characterbaseURL 		= '/wow/character/';
+	private $guildbaseURL 			= '/wow/guild/';
 	private $auctionhousebaseURL 	= '/api/wow/auction/data/';
-	private $itembaseURL 			= '/api/wow/item/';
-	private $realmbaseURL 			= '/api/wow/realm/status';
-	private $databaseURL			= '/api/wow/data/';
-	private $arenabaseURL			= '/api/wow/arena/';
-	private $questbaseURL			= '/api/wow/quest/';
+	private $itembaseURL 			= '/wow/item/';
+	private $realmbaseURL 			= '/wow/realm/status';
+	private $databaseURL			= '/wow/data/';
+	private $arenabaseURL			= '/wow/arena/';
+	private $questbaseURL			= '/wow/quest/';
 	private $cacheEnabled 			= TRUE;
    	private $useKeys				= FALSE;
    	private $utf8					= '';
@@ -27,8 +27,10 @@ class jsonConnect {
 		if ($this->cacheEnabled){
 	   		$this->cache = new CacheControl();
 		}
-		if (isset($GLOBALS['wowarmory']['keys']['private']) AND isset($GLOBALS['wowarmory']['keys']['public'])){
-			if (strlen($GLOBALS['wowarmory']['keys']['private']) > 1 AND strlen($GLOBALS['wowarmory']['keys']['public'] > 1)){
+		if (isset($GLOBALS['wowarmory']['keys']['api'])){
+		#if (isset($GLOBALS['wowarmory']['keys']['api']) AND isset($GLOBALS['wowarmory']['keys']['shared'])){
+			#if (strlen($GLOBALS['wowarmory']['keys']['api']) > 1 AND strlen($GLOBALS['wowarmory']['keys']['shared'] > 1)){
+			if (strlen($GLOBALS['wowarmory']['keys']['api']) > 1){
 				$this->useKeys = TRUE;
 			}
 		}
@@ -37,33 +39,33 @@ class jsonConnect {
    
    	
    	public function getAchievements($region,$id_list,$type){
-   		$url = 'http://'.$this->regions[$region].$this->databaseURL.$type.'/achievements';
+   		$url = 'https://'.$this->regions[$region].$this->databaseURL.$type.'/achievements';
    		$data = $this->getData($url, FALSE, $region,'Achievements',$id_list);
    		#print_r($data);
    		return $data;
    	}
 
    	public function getQuest($region,$id){
-   		$url = 'http://'.$this->regions[$region].$this->questbaseURL.$id;
+   		$url = 'https://'.$this->regions[$region].$this->questbaseURL.$id;
    		$data = $this->getData($url, FALSE, $region,'Quests');
    		return $data;
    	}
    	
    	
    	public function getRaces($region){
-   		$url = 'http://'.$this->regions[$region].$this->databaseURL.'/character/races';
+   		$url = 'https://'.$this->regions[$region].$this->databaseURL.'/character/races';
    		$data = $this->getData($url, FALSE, $region,'Races');
    		return $data;
    	}
    	
    	public function getPerks($region){
-   		$url = 'http://'.$this->regions[$region].$this->databaseURL.'/guild/perks';
+   		$url = 'https://'.$this->regions[$region].$this->databaseURL.'/guild/perks';
    		$data = $this->getData($url, FALSE, $region,'Perks');
    		return $data;
    	}
    	
    	public function getClasses($region){
-   		$url = 'http://'.$this->regions[$region].$this->databaseURL.'/character/classes';
+   		$url = 'https://'.$this->regions[$region].$this->databaseURL.'/character/classes';
    		$data = $this->getData($url, FALSE, $region,'Classes');
    		return $data;
    	}
@@ -86,7 +88,7 @@ class jsonConnect {
 			$character = utf8_encode($character);
 		}
 		$character = rawurlencode($character);
-		$url = 'http://'.$this->regions[$region].$this->characterbaseURL.$realm.'/'.$character;
+		$url = 'https://'.$this->regions[$region].$this->characterbaseURL.$realm.'/'.$character;
 		return $this->getData($url,$fields,$region,'Characters');
 	}
 
@@ -99,7 +101,7 @@ class jsonConnect {
 			$teamname = utf8_encode($teamname);
 		}
 		$teamname= rawurlencode($teamname);
-		$url = 'http://'.$this->regions[$region].$this->arenabaseURL.$realm.'/'.$teamsize.'/'.$teamname;
+		$url = 'https://'.$this->regions[$region].$this->arenabaseURL.$realm.'/'.$teamsize.'/'.$teamname;
 		return $this->getData($url, $fields, $region,'ArenaTeams');
 	}
 	
@@ -113,7 +115,7 @@ class jsonConnect {
 			$guild = utf8_encode($guild);
 		}
 		$guild = rawurlencode($guild);
-		$url = 'http://'.$this->regions[$region].$this->guildbaseURL.$realm.'/'.$guild;
+		$url = 'https://'.$this->regions[$region].$this->guildbaseURL.$realm.'/'.$guild;
 		return $this->getData($url, $fields, $region,'Guilds');
 	}
 	
@@ -122,18 +124,18 @@ class jsonConnect {
 			$realm = utf8_encode($realm);
 		}
 		$realm = rawurlencode($realm);
-		$url = 'http://'.$this->regions[$region].$this->auctionhousebaseURL.$realm;
+		$url = 'https://'.$this->regions[$region].$this->auctionhousebaseURL.$realm;
 		return $this->getData($url,FALSE, $region,'AuctionHouse');
 	}
 
 	public function getRealms($region){
-		$url = 'http://'.$this->regions[$region].$this->realmbaseURL;
+		$url = 'https://'.$this->regions[$region].$this->realmbaseURL;
 		return $this->getData($url,FALSE, $region);
 	}
 	
 	
 	public function getItem($itemID,$region){
-		$url = 'http://'.$this->regions[$region].$this->itembaseURL.$itemID;
+		$url = 'https://'.$this->regions[$region].$this->itembaseURL.$itemID;
 		return $this->getData($url, FALSE, $region, 'Items');
 	}
 
@@ -146,7 +148,6 @@ class jsonConnect {
 	   		$objectID = md5($url);
 	   		$url .= '?';
 		}
-		#print $url;
 		if ($fields != FALSE AND strlen($fields)>1){
 			$url .= 'fields='.$fields;
 		}
@@ -157,7 +158,9 @@ class jsonConnect {
 			}
    		} else {
    			if ($this->useKeys){
-   				$objectJSON = $this->getByKeys($url,$region);
+   				print "GETTING NEW DATA! $url\n";
+   				#$objectJSON = $this->getByKeys($url,$region);
+				$objectJSON = @file_get_contents($url."&apikey=".$GLOBALS['wowarmory']['keys']['api']);
    			} else {
 				$objectJSON = @file_get_contents($url);
    			}
@@ -184,8 +187,9 @@ class jsonConnect {
 	}
 	
 	private function getByKeys($url,$region){
-		$pubkey = $GLOBALS['wowarmory']['keys']['public'];
-		$privkey = $GLOBALS['wowarmory']['keys']['private'];
+		print "GETTING NEW DATA!\n";
+		$pubkey = $GLOBALS['wowarmory']['keys']['shared'];
+		$privkey = $GLOBALS['wowarmory']['keys']['api'];
 		$url = preg_replace('/^http/', 'https', $url);
 		$date = date('D, d M Y G:i:s T',time());
 		$stringtosign = "GET\n".$date."\n".$url."\n";
