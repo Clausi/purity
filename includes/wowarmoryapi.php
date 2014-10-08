@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 $GLOBALS['wowarmory']['db']['driver'] = 'mysql'; // Dont change. Only mysql supported so far.
 $GLOBALS['wowarmory']['db']['hostname'] = '127.0.0.1'; // Hostname of server. 
 $GLOBALS['wowarmory']['db']['dbname'] = ''; //Name of your database
