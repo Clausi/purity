@@ -96,6 +96,57 @@ function getGermanClass($class) {
 	return $GermanClass[strtolower($class)];
 }
 
+function getClassById($class) {
+	$EnglishClass = array(
+				6 => 'deathknight',
+				11 => 'druid',
+				3 => 'hunter',
+				8 => 'mage',
+				10 => 'monk',
+				2 => 'paladin',
+				5 => 'priest',
+				4 => 'rogue',
+				7 => 'shaman',
+				9 => 'warlock',
+				1 => 'warrior',
+			);
+	return $EnglishClass[$class];
+}
+
+function getRaceById($race) {
+	$EnglishRace = array(
+				1 => 'human',
+				2 => 'orc',
+				3 => 'dwarf',
+				4 => 'nightelf',
+				5 => 'undead',
+				6 => 'tauren',
+				7 => 'gnome',
+				8 => 'troll',
+				10 => 'bloodelf',
+				11 => 'draenei',
+				24 => 'pandaren',
+			);
+	return $EnglishRace[$race];
+}
+
+function getGermanRace($race) {
+	$EnglishRace = array(
+				'human' => 'Mensch',
+				'orc' => 'Ork',
+				'dwarf' => 'Zwerg',
+				'nightelf' => 'Nachtelf',
+				'undead' => 'Untot',
+				'tauren' => 'Trauren',
+				'gnome' => 'Gnom',
+				'troll' => 'Troll',
+				'bloodelf' => 'Blutelf',
+				'draenei' => 'Draenei',
+				'pandaren' => 'Pandaren',
+			);
+	return $EnglishRace[$race];
+}
+
 
 // Converttimestamp
 function convertTimestamp($timestamp) {
