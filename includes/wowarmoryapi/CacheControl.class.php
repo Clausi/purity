@@ -104,7 +104,7 @@ class CacheControl {
 					$fieldsData = explode(',', $fields);
 					#print_r($fieldsData);
 					foreach ($fieldsData as $field){
-						print "field: $field\n";
+						//print "field: $field\n";
 						if (!isset($data[$field]) AND !preg_match('/^pets$/',$field) AND !preg_match('/^guild$/',$field)){
 							$return = FALSE;
 						}
@@ -193,7 +193,3 @@ class CacheControl {
    		$sth->execute();
    	}
 }
-
-
-
-?>

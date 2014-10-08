@@ -11,6 +11,7 @@ include($phpbb_root_path . 'guild/includes/wowarmoryapi.' . $phpEx);
 
 $armory = new BattlenetArmory($GuildRegion, $GuildRealm);
 $armory->setLocale($armoryLocale);
+//$armory->debug('emblem', true);
 $guild = $armory->getGuild($GuildName);
-$guild->showEmblem();
+$guild->showEmblem(false, 215);
 $guild->saveEmblem($phpbb_root_path . 'guild/'. $GuildRegion .'_'. $GuildRealm .'_'. $GuildName .'.png');

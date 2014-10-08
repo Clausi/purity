@@ -17,4 +17,3 @@ class Races {
    		return $this->datas[$id][$field];
    	}
 }
-?>

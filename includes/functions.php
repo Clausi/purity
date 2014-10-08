@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 // Eindeutige Id eines Charakters (a la wowhead-tooltips)
 function generateKey($name, $realm='Anetheron', $region='EU'){
 	$name = strtolower(str_replace(' ', '', $name));
@@ -26,7 +31,6 @@ function GetRole($char) {
 		foreach($Talents as $Spec) {
 			if($Spec['selected'] == 1) {
 				$activerole = $Spec['spec']['role'];
-				//echo "\n".$activerole."\n";
 				$query = "UPDATE " . $TableNames['roster'] . " SET activerole = '".$activerole."' WHERE uniquekey = '".$uniquekey."'";
 				$result = mysql_query($query, $guildsql) or die(mysql_error());
 			}

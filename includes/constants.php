@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_PHPBB'))
+{
+	exit;
+}
+
 $GuildRegion = "eu";
 $GuildRealm = "anetheron";
 $GuildName = "purity";

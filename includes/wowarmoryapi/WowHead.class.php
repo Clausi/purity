@@ -32,5 +32,3 @@ class WowHead {
 		return stripslashes($returnvalue);
 	}
 }
-
-?>
