@@ -52,16 +52,19 @@ $ranks = array(
 	'friends' => 8,
 	'twink' => 7,
 	'trial' => 6,
+	'initiant' => 99,
 	'member' => 5,
 	'epgp' => 4,
 	'offitwink' => 3,
+	'raidlead' => 99,
+	'klassenleiter' => 99,
 	'offi' => 2,
 	'gildenrat' => 1,
 	'gildenmeister' => 0
 );
 
 
-$rerank = array("Sardra" => $rank['friends']);
+$rerank = array("Sardra" => $ranks['friends']);
 
 // Ränge 16.02.2014
 $rankFeb2014 = array();

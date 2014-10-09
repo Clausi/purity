@@ -127,9 +127,10 @@ function getRaceById($race) {
 				6 => 'tauren',
 				7 => 'gnome',
 				8 => 'troll',
+				9 => 'goblin',
 				10 => 'bloodelf',
 				11 => 'draenei',
-				24 => 'pandaren',
+				26 => 'pandaren',
 			);
 	return $EnglishRace[$race];
 }
@@ -143,6 +144,7 @@ function getGermanRace($race) {
 				'undead' => 'Untot',
 				'tauren' => 'Trauren',
 				'gnome' => 'Gnom',
+				'goblin' => 'Goblin',
 				'troll' => 'Troll',
 				'bloodelf' => 'Blutelf',
 				'draenei' => 'Draenei',
