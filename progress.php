@@ -50,16 +50,4 @@ while($raid = mysql_fetch_array($result)) {
 }
 $db->sql_freeresult($result);
 
-$query = "SELECT value FROM ". $TableNames['wowprogress'] ." WHERE name = 'realm_rank' LIMIT 1";
-$result = $db->sql_query($query);
-$row = mysql_fetch_array($result);
-if(is_numeric($row['value'])) $RealmRank = $row['value'];
-else $RealmRank = '~';
-
-$template->assign_vars(array(
-	'S_RAIDPROGRESS' => true,
-	'REGION'		=> strtolower($GuildRegion),
-	'REALM'		=> strtolower($GuildRealm),
-	'GUILD'		=> strtolower($GuildName),
-	'REALMRANK'	=> $RealmRank,
-));
+$template->assign_var('S_RAIDPROGRESS',true);
