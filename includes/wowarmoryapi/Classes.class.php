@@ -19,3 +19,4 @@ class Classes {
    		return $this->datas[$id][$field];
    	}
 }
+?>

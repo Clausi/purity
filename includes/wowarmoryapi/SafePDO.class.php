@@ -30,3 +30,4 @@ Class SafePDO extends PDO {
         }
 
 }
+?>

@@ -19,3 +19,4 @@ class Achievements {
    		return $this->datas[$id][$field];
    	}
 }
+?>

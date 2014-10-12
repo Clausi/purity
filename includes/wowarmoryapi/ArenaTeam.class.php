@@ -91,3 +91,4 @@ class ArenaTeam {
    		return $this->data;
    	}
 }
+?>

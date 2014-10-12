@@ -368,3 +368,6 @@ class Guild {
    		return $finalimg;
    	}
 }
+
+
+?>

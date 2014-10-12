@@ -32,7 +32,13 @@ class jsonConnect {
 			#if (strlen($GLOBALS['wowarmory']['keys']['api']) > 1 AND strlen($GLOBALS['wowarmory']['keys']['shared'] > 1)){
 			if (strlen($GLOBALS['wowarmory']['keys']['api']) > 1){
 				$this->useKeys = TRUE;
+			} else {
+				print "wowarmory API ERROR: API key is required. Please see documentation<br />\n";
+				exit;
 			}
+		} else {
+			print "wowarmory API ERROR: API key is required. Please see documentation<br />\n";
+			exit;
 		}
 		$this->utf8 = $GLOBALS['wowarmory']['UTF8'];
    	}
@@ -158,7 +164,7 @@ class jsonConnect {
 			}
    		} else {
    			if ($this->useKeys){
-   				print "GETTING NEW DATA! $url\n";
+   				$GLOBALS['wowarmory']['debug']['global'] ? print "GETTING NEW DATA! $url\n": '';
    				#$objectJSON = $this->getByKeys($url,$region);
 				$objectJSON = @file_get_contents($url."&apikey=".$GLOBALS['wowarmory']['keys']['api']);
    			} else {
@@ -214,3 +220,5 @@ class jsonConnect {
 		
 	}
 }
+
+?>

@@ -18,3 +18,4 @@ class Quest {
    		return $this->datas;
 	}
 }
+?>
