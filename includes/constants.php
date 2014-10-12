@@ -89,10 +89,27 @@ $WGPConfig['Cache'] = 3000; // Update interval
 // How many chars must have the progress
 $WGPConfig['CharacterMatch'] = 7;
 
+$WGPConfig['noIdBoss'] = array();
+$WGPConfig['noIdBoss']['Die Steinwache'] = 60047;
+$WGPConfig['noIdBoss']['Die Geisterkönige'] = 61421;
+$WGPConfig['noIdBoss']['Der Wille des Kaisers'] = 60400;
+$WGPConfig['noIdBoss']['Konklave des Windes'] = 45871;
+$WGPConfig['noIdBoss']['Das Konklave des Windes'] = 45871;
+$WGPConfig['noIdBoss']['Theralion und Valiona'] = 45992;
+$WGPConfig['noIdBoss']['Rat der Aszendenten'] = 43735;
+$WGPConfig['noIdBoss']['Omnotron-Verteidigungssystem'] = 42180;
+$WGPConfig['noIdBoss']['Kanonenschiffsschlacht von Eiskrone'] = 201873;
+$WGPConfig['noIdBoss']['Rat des Blutes'] = 37970;
+$WGPConfig['noIdBoss']['Bestien von Nordend'] = 34797;
+$WGPConfig['noIdBoss']['Fraktionschampions'] = 195631;
+$WGPConfig['noIdBoss']["Zwillingsval\'kyr"] = 34497;
+$WGPConfig['noIdBoss']['Die Versammlung des Eisens'] = 32857;
+$WGPConfig['noIdBoss']['Die vier Reiter'] = 181366;
+
 // Raidzone Ids - comment out raids you don't want to see
 $WGPConfig['Raids'] = array(
 	6738, // Siege of Orgrimmar
-//	6622, // Throne of Thunder
+	6622, // Throne of Thunder
 //	6125, // Mogu'shan Vaults
 //	6297, // Heart of Fear
 //	6067, // Terrace of Endless Springs

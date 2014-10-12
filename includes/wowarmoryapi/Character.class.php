@@ -434,9 +434,11 @@ class Character {
    			$numberofbosses = count($bosses);
    			$numberofbosseskilled = 0;
    			foreach ($bosses as $boss){
-   				if ($boss['normalKills']>0 OR $boss['heroicKills']>0){
-   					$numberofbosseskilled++;
-   				}
+				if(!empty($boss['normalKills']) && !empty($boss['normalKills'])){
+					if ($boss['normalKills']>0 OR $boss['heroicKills']>0){
+						$numberofbosseskilled++;
+					}
+				}
    			}
    			$t['totalbosses'] = $numberofbosses;
    			$raids[$key]['totalbosses'] = $numberofbosses;
