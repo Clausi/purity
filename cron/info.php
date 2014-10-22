@@ -19,6 +19,12 @@ echo "<pre>";
 print_r($guildData);
 echo "</pre>";
 
+if( ! is_array($guildData)) 
+{
+	trigger_error("No guild data array, armory not reachable", E_USER_ERROR);
+	exit;
+}
+
 foreach($guildData as $key => $value) 
 {
 	if($key != "members" && $key != "emblem" && $key != "achievements") 

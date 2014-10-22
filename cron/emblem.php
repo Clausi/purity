@@ -13,5 +13,11 @@ $armory = new BattlenetArmory($GuildRegion, $GuildRealm);
 $armory->setLocale($armoryLocale);
 //$armory->debug('emblem', true);
 $guild = $armory->getGuild($GuildName);
+if( ! is_array($guild)) 
+{
+	trigger_error("No guild array, armory not reachable", E_USER_ERROR);
+	exit;
+}
+
 $guild->showEmblem(false, 215);
 $guild->saveEmblem($phpbb_root_path . 'guild/'. $GuildRegion .'_'. $GuildRealm .'_'. $GuildName .'.png');
