@@ -1,7 +1,7 @@
-purity
+tenebrae
 ======
 
-purity forum - phpbb3.1 and battle.net api
-puritytheme: https://github.com/Clausi/purityguild
+tenebrae forum - phpbb3.1 and battle.net api
+tenetheme: https://github.com/Clausi/tenetheme
 
 Using PHP WoW Battle.net Armory API: https://sourceforge.net/projects/wowarmoryapi/

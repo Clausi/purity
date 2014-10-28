@@ -7,7 +7,7 @@ if (!defined('IN_PHPBB'))
 
 $GuildRegion = "eu";
 $GuildRealm = "anetheron";
-$GuildName = "purity";
+$GuildName = "tenebrae";
 $battlenetLocale = 'de';
 $armoryLocale = 'de_DE';
 
