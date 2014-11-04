@@ -12,9 +12,9 @@ $battlenetLocale = 'de';
 $armoryLocale = 'de_DE';
 
 // Forum Ids
-$newsForum = 2;
-$applyForum = 2;
-$applyThread = 1;
+$newsForum = 8;
+$applyForum = 23;
+$applyThread = 744;
 $leadGroup = 9;
 
 // DB Prefix
@@ -24,17 +24,13 @@ $DbPrefix = "guild_";
 $TableNames = array(
 	'roster' => $DbPrefix."roster",
 	'guild' => $DbPrefix."info",
-	'achievements' => $DbPrefix."achievements",
-	'perks' => $DbPrefix."perks",
 	'progress' => $DbPrefix."progress",
 	'progressbosses' => $DbPrefix."progressbosses",
 	'characterprogress' => $DbPrefix."characterprogress",
-	'recruitment' => $DbPrefix."recruitment",
-	'wowprogress' => $DbPrefix."wowprogress"
 );
 
 // Level anzeigen
-$showLevel = false;
+$showLevel = true;
 $showiLevel = true;
 
 // Rang anzeigen
