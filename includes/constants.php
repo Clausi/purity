@@ -123,6 +123,7 @@ $WGPConfig['Raids'] = array(
 
 // Freeze Raidzones - After new content is released, you can freeze your progress of spezified zones
 $WGPConfig['Freeze'] = array(
+	6738, // Siege of Orgrimmar
 	6622, // Throne of Thunder
 	6125, // Mogu'shan Vaults
 	6297, // Heart of Fear
