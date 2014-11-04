@@ -15,9 +15,9 @@ $armory->UTF8(TRUE);
 $guild = $armory->getGuild($GuildName);
 $guildData = $guild->getData();
 
-echo "<pre>";
-print_r($guildData);
-echo "</pre>";
+// echo "<pre>";
+// print_r($guildData);
+// echo "</pre>";
 
 if( ! is_array($guildData)) 
 {

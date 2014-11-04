@@ -14,10 +14,10 @@ $query = "SELECT uniquekey, name, realm FROM " . $TableNames['roster'] . " WHERE
 $result = $db->sql_query($query);
 $row = $db->sql_fetchrow($result);
 $Character = $row['name'];
-echo $uniquekey = $row['uniquekey'];
-echo "<br />";
-echo $Character;
-echo "<br />";
+// echo $uniquekey = $row['uniquekey'];
+// echo "<br />";
+// echo $Character;
+// echo "<br />";
 
 $realm = $row['realm'];
 if($realm == NULL) $realm = $GuildRealm;

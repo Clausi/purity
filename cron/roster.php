@@ -21,9 +21,9 @@ if( ! is_array($members))
 	exit;
 }
 
-echo "<pre>";
-print_r($members);
-echo "</pre>";
+// echo "<pre>";
+// print_r($members);
+// echo "</pre>";
 
 foreach($members as $char)
 {
