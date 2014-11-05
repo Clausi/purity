@@ -197,6 +197,9 @@ function getRank($rank, $ranks) {
 		case $ranks['offitwink']:
 			return 'Offitwink';
 		break;
+		case $ranks['gildenrat']:
+			return 'Offi';
+		break;
 		case $ranks['gildenbank']:
 			return 'Gildenbank';
 		break;
