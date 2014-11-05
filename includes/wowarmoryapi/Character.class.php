@@ -6,7 +6,7 @@ class Character {
 	private $region;
 	private $realm;
 	private $characterData;
-	private $fields = array('stats','talents','items','reputation','titles','professions','appearance','mounts','achievements','progression','pvp','quests','pets','guild','petSlots','audit','feed');
+	private $fields = array('stats','talents','items','reputation','titles','professions','appearance','mounts','achievements','progression','pvp','quests','pets','guild','petSlots','audit','feed','hunterPets');
 	private $cache;
 	private $currentTitle;
 	private $race;
@@ -119,6 +119,50 @@ class Character {
    		return $this->characterData['talents'];
    	}
    	
+   	/**
+   	 * Get character feed
+   	 * @return Array returns array with recent activities
+   	 */
+   	public function getFeed(){
+   		return $this->characterData['feed'];
+   	}
+
+   	/**
+   	 * Get character guild basics
+   	 * @return Array returns array with basic guild information
+   	 */
+   	public function getGuild(){
+   		return $this->characterData['guild'];
+   	}
+
+   	/**
+   	 * Get character combat pets
+   	 * @return Array|false returns array with combat pets, or false if not valid for character class
+   	 */
+   	public function getCombatPets(){
+		if (isset($this->characterData['hunterPets'])) {
+   			return $this->characterData['hunterPets'];
+		} else {
+			return FALSE;
+		}
+   	}
+
+   	/**
+   	 * Get character audit
+   	 * @return Array returns array with audit information
+   	 */
+   	public function getAudit(){
+   		return $this->characterData['audit'];
+   	}
+
+   	/**
+   	 * Get character pet slots
+   	 * @return Array returns array with pet slot information
+   	 */
+   	public function getPetSlots(){
+   		return $this->characterData['petSlots'];
+   	}
+
    	/**
    	 * Get the active talent tree
    	 * @return Array returns array with active talent tree
@@ -434,11 +478,9 @@ class Character {
    			$numberofbosses = count($bosses);
    			$numberofbosseskilled = 0;
    			foreach ($bosses as $boss){
-				if(!empty($boss['normalKills']) && !empty($boss['normalKills'])){
-					if ($boss['normalKills']>0 OR $boss['heroicKills']>0){
-						$numberofbosseskilled++;
-					}
-				}
+   				if ($boss['normalKills']>0 OR $boss['heroicKills']>0){
+   					$numberofbosseskilled++;
+   				}
    			}
    			$t['totalbosses'] = $numberofbosses;
    			$raids[$key]['totalbosses'] = $numberofbosses;

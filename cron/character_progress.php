@@ -10,17 +10,21 @@ include($phpbb_root_path . 'guild/includes/functions.' . $phpEx);
 include($phpbb_root_path . 'guild/includes/wowarmoryapi.' . $phpEx);
 
 
-$query = "SELECT uniquekey, name, realm FROM " . $TableNames['roster'] . " WHERE active = '1' AND (rank = 0 OR rank = 1 OR rank = 2 OR rank = 4 OR rank = 5 OR rank = 6) ORDER BY lastupdate ASC LIMIT 1";
+$query = "SELECT uniquekey, name, realm FROM " . $TableNames['roster'] . " WHERE active = '1' ORDER BY lastupdate ASC LIMIT 1";
 $result = $db->sql_query($query);
 $row = $db->sql_fetchrow($result);
 $Character = $row['name'];
-// echo $uniquekey = $row['uniquekey'];
-// echo "<br />";
-// echo $Character;
-// echo "<br />";
+echo $uniquekey = $row['uniquekey'];
+echo "<br />";
+echo $Character;
+echo "<br />";
 
 $realm = $row['realm'];
 if($realm == NULL) $realm = $GuildRealm;
+
+echo $realm;
+echo "<br />";
+echo $GuildRegion;
 
 $armory = new BattlenetArmory($GuildRegion, $realm);
 $armory->setLocale($armoryLocale);
@@ -32,13 +36,15 @@ $Raidprogress = $CharacterData->getRaidStats('desc');
 
 if( ! is_array($Raidprogress)) 
 {
-	trigger_error("No raidprogress array, armory not reachable", E_USER_ERROR);
+	$query = "UPDATE " . $TableNames['roster'] . " SET lastupdate = NOW() WHERE uniquekey = '".$uniquekey."'";
+	$result = $db->sql_query($query);
+	trigger_error("No raidprogress array, character not reachable", E_USER_ERROR);
 	exit;
 }
 
-// echo "<pre>";
-// print_r($Raidprogress);
-// echo "</pre>";
+echo "<pre>";
+print_r($Raidprogress);
+echo "</pre>";
 
 foreach($Raidprogress as $raid) {
 	if($raid['id'] != 0) {
@@ -176,11 +182,13 @@ while($row = $db->sql_fetchrow($result)) {
 		}
 	}
 }
+
 /*
 echo "<pre>";
 print_r($raidprogress);
 echo "</pre>";
 */
+
 // Combine Bosskills
 $raidresult = array();
 foreach($raidprogress as $raid) {

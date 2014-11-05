@@ -105,7 +105,7 @@ class CacheControl {
 					#print_r($fieldsData);
 					foreach ($fieldsData as $field){
 						#print "field: $field\n";
-						if (!isset($data[$field]) AND !preg_match('/^pets$/',$field) AND !preg_match('/^guild$/',$field)){
+						if (!isset($data[$field]) AND !preg_match('/^hunterPets$/',$field) AND !preg_match('/^pets$/',$field) AND !preg_match('/^guild$/',$field)){
 							$return = FALSE;
 						}
 					}

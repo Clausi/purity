@@ -10,10 +10,15 @@ include($phpbb_root_path . 'guild/includes/functions.' . $phpEx);
 include($phpbb_root_path . 'guild/includes/wowarmoryapi.' . $phpEx);
 
 $armory = new BattlenetArmory($GuildRegion, $GuildRealm);
+// $armory->setGuildsCacheTTL(1);
 $armory->setLocale($armoryLocale);
-$armory->debug('emblem', true);
+// $armory->debug('emblem', true);
 $guild = $armory->getGuild($GuildName);
-if( ! is_array($guild)) 
+$guildData = $guild->getData();
+// echo "<pre>";
+// print_r($guildData);
+// echo "</pre>";
+if( ! is_array($guildData)) 
 {
 	trigger_error("No guild array, armory not reachable", E_USER_ERROR);
 	exit;
