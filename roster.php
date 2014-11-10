@@ -22,6 +22,7 @@ while ($row = $db->sql_fetchrow($result))
 			'RACE' => $row['race'],
 			'RACENAME' => getGermanRace(getRaceById($row['race'])),
 			'GENDER' => $row['gender'],
+			'LASTSEENTIMESTAMP' => strtotime($row['cache']),
 			'LASTSEEN' => $user->format_date(strtotime($row['cache']), false, true)
 		));
 	}
