@@ -104,8 +104,10 @@ $WGPConfig['noIdBoss']['Die vier Reiter'] = 181366;
 
 // Raidzone Ids - comment out raids you don't want to see
 $WGPConfig['Raids'] = array(
+	6967, // Blackrock Foundry
+	6996, // Highmaul
 	6738, // Siege of Orgrimmar
-	6622, // Throne of Thunder
+//	6622, // Throne of Thunder
 //	6125, // Mogu'shan Vaults
 //	6297, // Heart of Fear
 //	6067, // Terrace of Endless Springs
