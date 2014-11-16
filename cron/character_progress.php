@@ -49,27 +49,26 @@ echo "</pre>";
 foreach($Raidprogress as $raid) {
 	if($raid['id'] != 0) {
 		// progress db
-		$flexbosses = $raid['totalbosses'];
-		$totalbosses = $raid['totalbosses'];
-		$totalhcbosses = $raid['totalbosses'];
-		if(array_key_exists($raid['id'], $WGPConfig['Fix']) == true) {
-			$flexbosses = $flexbosses + $WGPConfig['Fix'][$raid['id']][2];
-			$totalbosses = $totalbosses + $WGPConfig['Fix'][$raid['id']][0];
-			$totalhcbosses = $totalhcbosses + $WGPConfig['Fix'][$raid['id']][1];
-		}
+		$lfrbosses = $raid['lfr'];
+		$nhbosses = $raid['normal'];
+		$hcbosses = $raid['heroic'];
+		$mythicbosses = $raid['mythic'];
+
 		$query = "INSERT INTO 
 					".$TableNames['progress']."
 				SET
 					raidid = '".$raid['id']."',
 					raidname = '".$db->sql_escape($raid['name'])."',
-					flexbosses = '".$flexbosses."',
-					totalbosses = '".$totalbosses."',
-					totalhcbosses = '".$totalhcbosses."'
+					lfrbosses = '".$lfrbosses."',
+					nhbosses = '".$nhbosses."',
+					hcbosses = '".$hcbosses."',
+					mythicbosses = '".$mythicbosses."'
 				ON DUPLICATE KEY UPDATE
 					raidname = '".$db->sql_escape($raid['name'])."',
-					flexbosses = '".$flexbosses."',
-					totalbosses = '".$totalbosses."',
-					totalhcbosses = '".$totalhcbosses."'
+					lfrbosses = '".$lfrbosses."',
+					nhbosses = '".$nhbosses."',
+					hcbosses = '".$hcbosses."',
+					mythicbosses = '".$mythicbosses."'
 				";
 		$result = $db->sql_query($query);
 		
@@ -87,13 +86,23 @@ foreach($Raidprogress as $raid) {
 					LIMIT 1";
 			$result = $db->sql_query($query);
 			
-			if(!$boss['lfrKills']) !$boss['lfrKills'] = 0;
-			if(!$boss['flexKills']) !$boss['flexKills'] = 0;
-			if(!$boss['normalKills']) !$boss['normalKills'] = 0;
-			if(!$boss['heroicKills']) !$boss['heroicKills'] = 0;
+			if(empty($boss['lfrKills'])) $boss['lfrKills'] = 0;
+			if(empty($boss['normalKills'])) $boss['normalKills'] = 0;
+			if(empty($boss['heroicKills'])) $boss['heroicKills'] = 0;
+			if(empty($boss['mythicKills'])) $boss['mythicKills'] = 0;
+			
+			if(!empty($boss['lfrTimestamp'])) $lfrTimestamp = convertTimestamp($boss['lfrTimestamp']);
+			else $lfrTimestamp = 0;
+			if(!empty($boss['normalTimestamp'])) $normalTimestamp = convertTimestamp($boss['normalTimestamp']);
+			else $normalTimestamp = 0;
+			if(!empty($boss['heroicKills'])) $heroicTimestamp = convertTimestamp($boss['heroicKills']);
+			else $heroicTimestamp = 0;
+			if(!empty($boss['mythicTimestamp'])) $mythicTimestamp = convertTimestamp($boss['mythicTimestamp']);
+			else $mythicTimestamp = 0;
 			
 			if($db->sql_fetchfield('count_id') == 0)
 			{
+				
 				$insertQuery = "INSERT INTO 
 							" . $TableNames['characterprogress'] . "
 						SET
@@ -102,13 +111,13 @@ foreach($Raidprogress as $raid) {
 							bossid = '".$bossid."',
 							bossname = '".$bossname."',
 							lfrKills = '".$boss['lfrKills']."',
-							lfrFirstkill = '".convertTimestamp($boss['lfrTimestamp'])."',
-							flexKills = '".$boss['flexKills']."',
-							flexFirstkill = '".convertTimestamp($boss['flexTimestamp'])."',
+							lfrFirstkill = '".$lfrTimestamp."',
 							normalKills = '".$boss['normalKills']."',
-							normalFirstkill = '".convertTimestamp($boss['normalTimestamp'])."',
+							normalFirstkill = '".$normalTimestamp."',
 							heroicKills = '".$boss['heroicKills']."',
-							heroicFirstkill = '".convertTimestamp($boss['heroicTimestamp'])."'
+							heroicFirstkill = '".$heroicTimestamp."',
+							mythicKills = '".$boss['mythicKills']."',
+							mythicFirstkill = '".$mythicTimestamp."'
 						";
 				$insertResult = $db->sql_query($insertQuery);
 			}
@@ -129,13 +138,13 @@ foreach($Raidprogress as $raid) {
 							bossid = '".$bossid."',
 							bossname = '".$bossname."',
 							lfrKills = '".$boss['lfrKills']."',
-							lfrFirstkill = CASE WHEN (lfrFirstkill < '".convertTimestamp($boss['lfrTimestamp'])."' AND lfrFirstkill > 0) OR '".convertTimestamp($boss['lfrTimestamp'])."' = 0 THEN lfrFirstkill ELSE '".convertTimestamp($boss['lfrTimestamp'])."' END,
-							flexKills = '".$boss['flexKills']."',
-							flexFirstkill = CASE WHEN (flexFirstkill < '".convertTimestamp($boss['flexTimestamp'])."' AND flexFirstkill > 0) OR '".convertTimestamp($boss['flexTimestamp'])."' = 0 THEN flexFirstkill ELSE '".convertTimestamp($boss['flexTimestamp'])."' END,
+							lfrFirstkill = CASE WHEN (lfrFirstkill < '".$lfrTimestamp."' AND lfrFirstkill > 0) OR '".$lfrTimestamp."' = 0 THEN lfrFirstkill ELSE '".$lfrTimestamp."' END,
 							normalKills = '".$boss['normalKills']."',
-							normalFirstkill = CASE WHEN (normalFirstkill < '".convertTimestamp($boss['normalTimestamp'])."' AND normalFirstkill > 0) OR '".convertTimestamp($boss['normalTimestamp'])."' = 0 THEN normalFirstkill ELSE '".convertTimestamp($boss['normalTimestamp'])."' END,
+							normalFirstkill = CASE WHEN (normalFirstkill < '".$normalTimestamp."' AND normalFirstkill > 0) OR '".$normalTimestamp."' = 0 THEN normalFirstkill ELSE '".$normalTimestamp."' END,
 							heroicKills = '".$boss['heroicKills']."',
-							heroicFirstkill = CASE WHEN (heroicFirstkill < '".convertTimestamp($boss['heroicTimestamp'])."' AND heroicFirstkill > 0) OR '".convertTimestamp($boss['heroicTimestamp'])."' = 0 THEN heroicFirstkill ELSE '".convertTimestamp($boss['heroicTimestamp'])."' END
+							heroicFirstkill = CASE WHEN (heroicFirstkill < '".$heroicTimestamp."' AND heroicFirstkill > 0) OR '".$heroicTimestamp."' = 0 THEN heroicFirstkill ELSE '".$heroicTimestamp."' END.
+							mythicKills = '".$boss['mythicKills']."',
+							mythicFirstkill = CASE WHEN (mythicFirstkill < '".$mythicTimestamp."' AND mythicFirstkill > 0) OR '".$mythicTimestamp."' = 0 THEN mythicFirstkill ELSE '".$mythicTimestamp."' END
 						WHERE
 							id = '".$row['id']."' AND uniquekey = '".$uniquekey."'
 						";
@@ -150,7 +159,7 @@ $result = $db->sql_query($query);
 
 // Begin combine progress
 
-$modes = array("flex", "normal", "heroic");
+$modes = array("lfr", "normal", "heroic", 'mythic');
 
 $query = "SELECT * FROM ".$TableNames['progress']." ORDER BY raidid";
 $result = $db->sql_query($query);
@@ -174,7 +183,7 @@ while($row = $db->sql_fetchrow($result)) {
 					$month = date("n", $charRow[$mode.'Firstkill']);
 					$year = date("Y", $charRow[$mode.'Firstkill']);
 					$timestampDay = mktime(0, 0, 0, $month, $day, $year);
-					if(is_array($raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills']) == false) $raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'] = array();
+					if(!empty($raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills']) && is_array($raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills']) == false) $raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'] = array();
 					
 					$raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'][$timestampDay] = $raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'][$timestampDay] + 1;
 				}
@@ -225,31 +234,55 @@ echo "</pre>";
 */
 
 foreach($raidresult as $raid){
-	$flexKills = 0;
+	$lfrKills = 0;
 	$normalKills = 0;
 	$heroicKills = 0;
+	$mythicKills = 0;
 	foreach($raid['bosses'] as $boss) {
 		foreach($modes as $mode){
-			if($mode == 'normal') $heroic = 0;
-			else if($mode == 'flex') $heroic = 2;
-			else $heroic = 1;
+			switch($mode) {
+				case 'lfr':
+					$mode = 0;
+				break;
+				case 'normal':
+					$mode = 1;
+				break;
+				case 'heroic':
+					$mode = 2;
+				break;
+				case 'mythic':
+					$mode = 3;
+				break;
+			}
+
 			if(is_array($boss[$mode]) == true) {
 				if($boss[$mode]['count'] >= $WGPConfig['CharacterMatch']) {
-					$query = "SELECT COUNT(id) as count_id FROM " .$TableNames['progressbosses']. " WHERE bossid = '".$boss['id']."' AND heroic='".$heroic."' LIMIT 1";
+					$query = "SELECT COUNT(id) as count_id FROM " .$TableNames['progressbosses']. " WHERE bossid = '".$boss['id']."' AND mode='".$mode."' LIMIT 1";
 					$result = $db->sql_query($query);
 					if($db->sql_fetchfield('count_id') == 0) {
 						$insertQuery = "INSERT INTO " .$TableNames['progressbosses']. " SET
 										bossid = '".$boss['id']."',
 										raidid = '".$raid['id']."',
-										heroic = '".$heroic."',
+										mode = '".$mode."',
 										name = '".$db->sql_escape($boss['name'])."',
 										killdate = '".$boss[$mode]['time']."'";
 						$insertResult = $db->sql_query($insertQuery);
 					}
 
-					if($mode == 'normal') $normalKills++;
-					else if($mode == 'flex') $flexKills++;
-					else $heroicKills++;
+					switch($mode) {
+						case 'lfr':
+							$lfrKills++;
+						break;
+						case 'normal':
+							$normalKills++;
+						break;
+						case 'heroic':
+							$heroicKills++;
+						break;
+						case 'mythic':
+							$mythicKills++;
+						break;
+					}
 				}
 			}
 		}

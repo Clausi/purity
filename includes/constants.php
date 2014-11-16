@@ -133,8 +133,3 @@ $WGPConfig['Freeze'] = array(
 	5638, // Throne
 	5600, // Baradin <-- Buggy
 );
-
-// Fix raidzones with false Bossnumbers: Id => array(Fixnumber, 0/1 nh/hc/flex)
-$WGPConfig['Fix'] = array(
-	6622 => array(-1, 0), // Throne of Thunder
-);
