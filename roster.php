@@ -15,6 +15,7 @@ while ($row = $db->sql_fetchrow($result))
 		$template->assign_block_vars('n_exMembers', array(
 			'NAME' => $row['name'],
 			'RANKNAME' => getRank($row['rank'], $ranks),
+			'REALM' => $row['realm'],
 			'LEVEL'	=> $row['level'],
 			'ILEVEL' => $row['iLevel'],
 			'CLASS'	=> $row['class'],
@@ -32,6 +33,7 @@ while ($row = $db->sql_fetchrow($result))
 			'NAME' => $row['name'],
 			'RANK' => $row['rank'],
 			'RANKNAME' => getRank($row['rank'], $ranks),
+			'REALM' => $row['realm'],
 			'LEVEL'	=> $row['level'],
 			'ILEVEL' => $row['iLevel'],
 			'CLASS'	=> $row['class'],
@@ -39,8 +41,7 @@ while ($row = $db->sql_fetchrow($result))
 			'RACE' => $row['race'],
 			'RACENAME' => getGermanRace(getRaceById($row['race'])),
 			'GENDER' => $row['gender'],
-			'ACHIEVEMENTPOINTS' => $row['achievementPoints'],
-			'FIRSTSEEN' => $user->format_date(strtotime($row['firstseen']), false, true)
+			'ACHIEVEMENTPOINTS' => $row['achievementPoints']
 		));
 	}
 }
