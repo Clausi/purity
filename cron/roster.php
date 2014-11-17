@@ -15,15 +15,15 @@ $armory->UTF8(TRUE);
 $guild = $armory->getGuild($GuildName);
 $members = $guild->getMembers();
 
+echo "<pre>";
+print_r($members);
+echo "</pre>";
+
 if( ! is_array($members)) 
 {
 	trigger_error("No roster array, armory not reachable", E_USER_ERROR);
 	exit;
 }
-
-// echo "<pre>";
-// print_r($members);
-// echo "</pre>";
 
 foreach($members as $char)
 {

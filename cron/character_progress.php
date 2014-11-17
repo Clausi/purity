@@ -10,7 +10,7 @@ include($phpbb_root_path . 'guild/includes/functions.' . $phpEx);
 include($phpbb_root_path . 'guild/includes/wowarmoryapi.' . $phpEx);
 
 
-$query = "SELECT uniquekey, name, realm FROM " . $TableNames['roster'] . " WHERE active = '1' ORDER BY lastupdate ASC LIMIT 1";
+$query = "SELECT uniquekey, name, realm FROM " . $TableNames['roster'] . " WHERE active = '1' and name = 'Senestra' ORDER BY lastupdate ASC LIMIT 1";
 $result = $db->sql_query($query);
 $row = $db->sql_fetchrow($result);
 $Character = $row['name'];
@@ -42,9 +42,9 @@ if( ! is_array($Raidprogress))
 	exit;
 }
 
-echo "<pre>";
-print_r($Raidprogress);
-echo "</pre>";
+// echo "<pre>";
+// print_r($Raidprogress);
+// echo "</pre>";
 
 foreach($Raidprogress as $raid) {
 	if($raid['id'] != 0) {
@@ -183,7 +183,7 @@ while($row = $db->sql_fetchrow($result)) {
 					$month = date("n", $charRow[$mode.'Firstkill']);
 					$year = date("Y", $charRow[$mode.'Firstkill']);
 					$timestampDay = mktime(0, 0, 0, $month, $day, $year);
-					if(!empty($raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills']) && is_array($raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills']) == false) $raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'] = array();
+					if(isset($raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills']) == false && is_array($raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills']) == false) $raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'] = array();
 					
 					$raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'][$timestampDay] = $raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'][$timestampDay] + 1;
 				}
@@ -192,11 +192,9 @@ while($row = $db->sql_fetchrow($result)) {
 	}
 }
 
-/*
 echo "<pre>";
 print_r($raidprogress);
 echo "</pre>";
-*/
 
 // Combine Bosskills
 $raidresult = array();
@@ -227,6 +225,7 @@ foreach($raidprogress as $raid) {
 		}
 	}
 }
+
 /*
 echo "<pre>";
 print_r($raidresult);
@@ -291,17 +290,21 @@ foreach($raidresult as $raid){
 	else $active = 0;
 	$updateQuery = "UPDATE " .$TableNames['progress']. " SET
 						active = '".$active."',
-						flexbosseskilled = CASE
-							WHEN flexbosseskilled > '".$flexKills."' THEN flexbosseskilled
-							ELSE '".$flexKills."'
+						lfrbosseskilled = CASE
+							WHEN lfrbosseskilled > '".$lfrKills."' THEN lfrbosseskilled
+							ELSE '".$lfrKills."'
 							END,
-						bosseskilled = CASE
-							WHEN bosseskilled > '".$normalKills."' THEN bosseskilled
+						nhbosseskilled = CASE
+							WHEN nhbosseskilled > '".$normalKills."' THEN nhbosseskilled
 							ELSE '".$normalKills."'
 							END,
 						hcbosseskilled = CASE
 							WHEN hcbosseskilled > '".$heroicKills."' THEN hcbosseskilled
 							ELSE '".$heroicKills."'
+							END,
+						mythicbosseskilled = CASE
+							WHEN mythicbosseskilled > '".$mythicKills."' THEN mythicbosseskilled
+							ELSE '".$mythicKills."'
 							END
 					WHERE
 						raidid = '".$raid['id']."'
