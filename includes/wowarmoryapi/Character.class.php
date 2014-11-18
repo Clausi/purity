@@ -478,7 +478,7 @@ class Character {
    			$numberofbosses = count($bosses);
    			$numberofbosseskilled = 0;
    			foreach ($bosses as $boss){
-   				if ($boss['normalKills']>0 OR $boss['heroicKills']>0){
+   				if ((isset($boss['normalKills']) AND $boss['normalKills']>0) OR (isset($boss['heroicKills']) AND $boss['heroicKills']>0)){
    					$numberofbosseskilled++;
    				}
    			}

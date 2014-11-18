@@ -10,20 +10,22 @@ $result = $db->sql_query($query);
 
 $i = 1;
 while($raid = $db->sql_fetchrow($result)) {
-	$prozent = round($raid['bosseskilled'] / $raid['totalbosses'] * 100);
-	$prozenthc = round($raid['hcbosseskilled'] / $raid['totalhcbosses'] * 100);
+	if($raid['hcbosses'] > 0) $prozentHc = round($raid['hcbosseskilled'] / $raid['hcbosses'] * 100);
+	else $prozentHc = 0;
+	if($raid['mythicbosses'] > 0) $prozentMythic = round($raid['mythicbosseskilled'] / $raid['mythicbosses'] * 100);
+	else $prozentMythic = 0;
 	
 	$template->assign_block_vars('n_raidprogress', array(
-		'NORMALNUMBER' => 'n'.$i,
 		'HEROICNUMBER' => 'h'.$i,
+		'MYTHICNUMBER' => 'm'.$i,
 		'RAIDID'		=> $raid['raidid'],
 		'RAIDNAME'	=> $raid['raidname'],
-		'BOSSESKILLED'	=> $raid['bosseskilled'],
-		'HCBOSSESKILLED' => $raid['hcbosseskilled'],
-		'TOTALBOSSES'	=> $raid['totalbosses'],
-		'TOTALHCBOSSES'	=> $raid['totalhcbosses'],
-		'PROZENT'	=> $prozent,
-		'PROZENTHC' => $prozenthc,
+		'HCBOSSESKILLED'	=> $raid['hcbosseskilled'],
+		'MYTHICBOSSESKILLED' => $raid['mythicbosseskilled'],
+		'HCBOSSES'	=> $raid['hcbosses'],
+		'MYTHICBOSSES'	=> $raid['mythicbosses'],
+		'PROZENTHC'	=> $prozentHc,
+		'PROZENTMYTHIC' => $prozentMythic,
 	));
 	$i++;
 	
@@ -31,14 +33,14 @@ while($raid = $db->sql_fetchrow($result)) {
 	$result2 = $db->sql_query($query);
 	
 	while($boss = $db->sql_fetchrow($result2)) {
-		if($boss['heroic'] == 0) {
-			$template->assign_block_vars('n_raidprogress.n_nhkills', array(
+		if($boss['mode'] == 2) {
+			$template->assign_block_vars('n_raidprogress.n_hckills', array(
 				'BOSSNAME' => $boss['name'],
 				'KILLDATE' => date('d.m.Y', $boss['killdate']),
 			));
 		}
-		else if ($boss['heroic'] == 1) {
-			$template->assign_block_vars('n_raidprogress.n_hckills', array(
+		else if ($boss['mode'] == 3) {
+			$template->assign_block_vars('n_raidprogress.n_mythickills', array(
 				'BOSSNAME' => $boss['name'],
 				'KILLDATE' => date('d.m.Y', $boss['killdate']),
 			));

@@ -106,7 +106,7 @@ $WGPConfig['noIdBoss']['Die vier Reiter'] = 181366;
 $WGPConfig['Raids'] = array(
 	6967, // Blackrock Foundry
 	6996, // Highmaul
-	6738, // Siege of Orgrimmar
+//	6738, // Siege of Orgrimmar
 //	6622, // Throne of Thunder
 //	6125, // Mogu'shan Vaults
 //	6297, // Heart of Fear

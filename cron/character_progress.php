@@ -10,7 +10,7 @@ include($phpbb_root_path . 'guild/includes/functions.' . $phpEx);
 include($phpbb_root_path . 'guild/includes/wowarmoryapi.' . $phpEx);
 
 
-$query = "SELECT uniquekey, name, realm FROM " . $TableNames['roster'] . " WHERE active = '1' and name = 'Senestra' ORDER BY lastupdate ASC LIMIT 1";
+$query = "SELECT uniquekey, name, realm FROM " . $TableNames['roster'] . " WHERE active = '1' ORDER BY lastupdate ASC LIMIT 1";
 $result = $db->sql_query($query);
 $row = $db->sql_fetchrow($result);
 $Character = $row['name'];
@@ -28,7 +28,7 @@ echo $GuildRegion;
 
 $armory = new BattlenetArmory($GuildRegion, $realm);
 $armory->setLocale($armoryLocale);
-$armory->UTF8(TRUE);
+//$armory->UTF8(TRUE);
 $armory->setCharactersCacheTTL($WGPConfig['Cache']);
 
 $CharacterData = $armory->getCharacter($Character);
@@ -142,7 +142,7 @@ foreach($Raidprogress as $raid) {
 							normalKills = '".$boss['normalKills']."',
 							normalFirstkill = CASE WHEN (normalFirstkill < '".$normalTimestamp."' AND normalFirstkill > 0) OR '".$normalTimestamp."' = 0 THEN normalFirstkill ELSE '".$normalTimestamp."' END,
 							heroicKills = '".$boss['heroicKills']."',
-							heroicFirstkill = CASE WHEN (heroicFirstkill < '".$heroicTimestamp."' AND heroicFirstkill > 0) OR '".$heroicTimestamp."' = 0 THEN heroicFirstkill ELSE '".$heroicTimestamp."' END.
+							heroicFirstkill = CASE WHEN (heroicFirstkill < '".$heroicTimestamp."' AND heroicFirstkill > 0) OR '".$heroicTimestamp."' = 0 THEN heroicFirstkill ELSE '".$heroicTimestamp."' END,
 							mythicKills = '".$boss['mythicKills']."',
 							mythicFirstkill = CASE WHEN (mythicFirstkill < '".$mythicTimestamp."' AND mythicFirstkill > 0) OR '".$mythicTimestamp."' = 0 THEN mythicFirstkill ELSE '".$mythicTimestamp."' END
 						WHERE
@@ -183,36 +183,51 @@ while($row = $db->sql_fetchrow($result)) {
 					$month = date("n", $charRow[$mode.'Firstkill']);
 					$year = date("Y", $charRow[$mode.'Firstkill']);
 					$timestampDay = mktime(0, 0, 0, $month, $day, $year);
-					if(isset($raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills']) == false && is_array($raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills']) == false) $raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'] = array();
+					if( ! array_key_exists($mode.'Kills', $raidprogress[$row['raidid']]['bosses'][$charRow['bossid']]))
+					{
+						$raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'] = array();
+					}
 					
-					$raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'][$timestampDay] = $raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'][$timestampDay] + 1;
+					if(is_array($raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills']))
+					{
+						if( ! isset($raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'][$timestampDay]))
+						{
+							$raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'][$timestampDay] = 0;
+						}
+						$raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'][$timestampDay] = $raidprogress[$row['raidid']]['bosses'][$charRow['bossid']][$mode.'Kills'][$timestampDay] + 1;
+					}
 				}
 			}
 		}
 	}
 }
 
-echo "<pre>";
-print_r($raidprogress);
-echo "</pre>";
+// echo "<pre>";
+// print_r($raidprogress);
+// echo "</pre>";
 
 // Combine Bosskills
 $raidresult = array();
-foreach($raidprogress as $raid) {
+foreach($raidprogress as $raid) 
+{
 	$raidresult[$raid['id']] = array();
 	$raidresult[$raid['id']]['id'] = $raid['id'];
 	$raidresult[$raid['id']]['bosses'] = array();
-	foreach($raid['bosses'] as $boss) {
+	foreach($raid['bosses'] as $boss) 
+	{
 		$raidresult[$raid['id']]['bosses'][$boss['id']] = array();
 		$raidresult[$raid['id']]['bosses'][$boss['id']]['id'] = $boss['id'];
 		$raidresult[$raid['id']]['bosses'][$boss['id']]['name'] = $boss['name'];
-		foreach($modes as $mode) {
-			if(is_array($boss[$mode.'Kills']) == true) {
+		foreach($modes as $mode)
+		{
+			if(array_key_exists($mode.'Kills', $boss))
+			{
 				$raidresult[$raid['id']]['bosses'][$boss['id']][$mode] = array();
 				$raidresult[$raid['id']]['bosses'][$boss['id']][$mode]['time'] = 0;
 				$raidresult[$raid['id']]['bosses'][$boss['id']][$mode]['count'] = 0;
 				
-				while($kill = current($boss[$mode.'Kills'])){
+				while($kill = current($boss[$mode.'Kills']))
+				{
 					if((key($boss[$mode.'Kills']) < $raidresult[$raid['id']]['bosses'][$boss['id']][$mode]['time'] 
 							&& $kill >= $raidresult[$raid['id']]['bosses'][$boss['id']][$mode]['count']) 
 							|| $raidresult[$raid['id']]['bosses'][$boss['id']][$mode]['time'] == 0){
@@ -226,11 +241,11 @@ foreach($raidprogress as $raid) {
 	}
 }
 
-/*
+
 echo "<pre>";
 print_r($raidresult);
 echo "</pre>";
-*/
+
 
 foreach($raidresult as $raid){
 	$lfrKills = 0;
@@ -254,7 +269,7 @@ foreach($raidresult as $raid){
 				break;
 			}
 
-			if(is_array($boss[$mode]) == true) {
+			if(array_key_exists($mode, $boss)) {
 				if($boss[$mode]['count'] >= $WGPConfig['CharacterMatch']) {
 					$query = "SELECT COUNT(id) as count_id FROM " .$TableNames['progressbosses']. " WHERE bossid = '".$boss['id']."' AND mode='".$mode."' LIMIT 1";
 					$result = $db->sql_query($query);
