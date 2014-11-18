@@ -242,9 +242,9 @@ foreach($raidprogress as $raid)
 }
 
 
-echo "<pre>";
-print_r($raidresult);
-echo "</pre>";
+// echo "<pre>";
+// print_r($raidresult);
+// echo "</pre>";
 
 
 foreach($raidresult as $raid){
