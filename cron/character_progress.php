@@ -49,10 +49,11 @@ if( ! is_array($Raidprogress))
 foreach($Raidprogress as $raid) {
 	if($raid['id'] != 0) {
 		// progress db
-		$lfrbosses = $raid['lfr'];
-		$nhbosses = $raid['normal'];
-		$hcbosses = $raid['heroic'];
-		$mythicbosses = $raid['mythic'];
+		// $lfrbosses = $raid['lfr'];
+		// $nhbosses = $raid['normal'];
+		// $hcbosses = $raid['heroic'];
+		// $mythicbosses = $raid['mythic'];
+		$lfrbosses = $nhbosses = $hcbosses = $mythicbosses = count($raid['bosses']);
 
 		$query = "INSERT INTO 
 					".$TableNames['progress']."

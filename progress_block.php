@@ -8,7 +8,6 @@ if (!defined('IN_PHPBB'))
 $query = "SELECT * FROM ". $TableNames['progress'] ." WHERE active = '1' ORDER BY raidid DESC";
 $result = $db->sql_query($query);
 
-$i = 1;
 while($raid = $db->sql_fetchrow($result)) {
 	if($raid['hcbosses'] > 0) $prozentHc = round($raid['hcbosseskilled'] / $raid['hcbosses'] * 100);
 	else $prozentHc = 0;
@@ -16,8 +15,6 @@ while($raid = $db->sql_fetchrow($result)) {
 	else $prozentMythic = 0;
 	
 	$template->assign_block_vars('n_raidprogress', array(
-		'HEROICNUMBER' => 'h'.$i,
-		'MYTHICNUMBER' => 'm'.$i,
 		'RAIDID'		=> $raid['raidid'],
 		'RAIDNAME'	=> $raid['raidname'],
 		'HCBOSSESKILLED'	=> $raid['hcbosseskilled'],
@@ -27,7 +24,6 @@ while($raid = $db->sql_fetchrow($result)) {
 		'PROZENTHC'	=> $prozentHc,
 		'PROZENTMYTHIC' => $prozentMythic,
 	));
-	$i++;
 	
 	$query = "SELECT * FROM ". $TableNames['progressbosses'] ." WHERE raidid = '". $raid['raidid'] ."' ORDER BY killdate, id, bossid, raidid, name";
 	$result2 = $db->sql_query($query);
