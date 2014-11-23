@@ -203,9 +203,9 @@ while($row = $db->sql_fetchrow($result)) {
 	}
 }
 
-echo "<pre>";
-print_r($raidprogress);
-echo "</pre>";
+// echo "<pre>";
+// print_r($raidprogress);
+// echo "</pre>";
 
 // Combine Bosskills
 $raidresult = array();
