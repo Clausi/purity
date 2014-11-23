@@ -96,7 +96,7 @@ foreach($Raidprogress as $raid) {
 			else $lfrTimestamp = 0;
 			if(!empty($boss['normalTimestamp'])) $normalTimestamp = convertTimestamp($boss['normalTimestamp']);
 			else $normalTimestamp = 0;
-			if(!empty($boss['heroicKills'])) $heroicTimestamp = convertTimestamp($boss['heroicKills']);
+			if(!empty($boss['heroicTimestamp'])) $heroicTimestamp = convertTimestamp($boss['heroicTimestamp']);
 			else $heroicTimestamp = 0;
 			if(!empty($boss['mythicTimestamp'])) $mythicTimestamp = convertTimestamp($boss['mythicTimestamp']);
 			else $mythicTimestamp = 0;
@@ -203,9 +203,9 @@ while($row = $db->sql_fetchrow($result)) {
 	}
 }
 
-// echo "<pre>";
-// print_r($raidprogress);
-// echo "</pre>";
+echo "<pre>";
+print_r($raidprogress);
+echo "</pre>";
 
 // Combine Bosskills
 $raidresult = array();
@@ -257,16 +257,16 @@ foreach($raidresult as $raid){
 		foreach($modes as $mode){
 			switch($mode) {
 				case 'lfr':
-					$mode = 0;
+					$modeId = 0;
 				break;
 				case 'normal':
-					$mode = 1;
+					$modeId = 1;
 				break;
 				case 'heroic':
-					$mode = 2;
+					$modeId = 2;
 				break;
 				case 'mythic':
-					$mode = 3;
+					$modeId = 3;
 				break;
 			}
 
@@ -278,7 +278,7 @@ foreach($raidresult as $raid){
 						$insertQuery = "INSERT INTO " .$TableNames['progressbosses']. " SET
 										bossid = '".$boss['id']."',
 										raidid = '".$raid['id']."',
-										mode = '".$mode."',
+										mode = '".$modeId."',
 										name = '".$db->sql_escape($boss['name'])."',
 										killdate = '".$boss[$mode]['time']."'";
 						$insertResult = $db->sql_query($insertQuery);
