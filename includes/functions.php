@@ -167,17 +167,14 @@ function getRank($rank, $ranks) {
 		case $ranks['member']:
 			return 'Member';
 		break;
-		case $ranks['epgp']:
-			return 'Member';
-		break;
 		case $ranks['inaktiv']:
 			return 'Inaktiv';
 		break;
 		case $ranks['raidlead']:
-			return '<strong>Raidlead</strong>';
+			return 'Raidlead';
 		break;
 		case $ranks['klassenleiter']:
-			return '<strong>Klassenleiter</strong>';
+			return 'Klassenleiter';
 		break;
 		case $ranks['initiant']:
 			return 'Initiant';

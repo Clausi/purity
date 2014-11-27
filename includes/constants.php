@@ -50,9 +50,8 @@ $ranks = array(
 	'trial' => 6,
 	'initiant' => 99,
 	'member' => 5,
-	'epgp' => 4,
-	'offitwink' => 3,
-	'raidlead' => 99,
+	'offitwink' => 4,
+	'raidlead' => 3,
 	'klassenleiter' => 99,
 	'offi' => 2,
 	'gildenrat' => 1,
@@ -61,23 +60,6 @@ $ranks = array(
 
 
 $rerank = array("Sardra" => $ranks['friends']);
-
-// Ränge 16.02.2014
-$rankFeb2014 = array();
-$rankFeb2014['friends'] = 5;
-$rankFeb2014['twink'] = 4;
-$rankFeb2014['trial'] = 3;
-$rankFeb2014['member'] = 2;
-$rankFeb2014['gildenrat'] = 1;
-$rankFeb2014['gildenmeister'] = 0;
-
-// Ränge 15. März 2012
-$rankMarch2012 = array();
-$rankMarch2012['friends'] = 4;
-$rankMarch2012['twink'] = 3;
-$rankMarch2012['member'] = 2;
-$rankMarch2012['gildenrat'] = 1;
-$rankMarch2012['gildenmeister'] = 0;
 
 // Raidprogress
 $WGPConfig['Cache'] = 3000; // Update interval

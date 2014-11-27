@@ -14,7 +14,6 @@ while ($row = $db->sql_fetchrow($result))
 	{
 		$template->assign_block_vars('n_exMembers', array(
 			'NAME' => $row['name'],
-			'RANKNAME' => getRank($row['rank'], $ranks),
 			'REALM' => $row['realm'],
 			'LEVEL'	=> $row['level'],
 			'ILEVEL' => $row['iLevel'],
