@@ -37,6 +37,6 @@ $gear = $CharacterData->getGear();
 $query = "UPDATE " . $TableNames['roster'] . " SET iLevel = '".$gear['averageItemLevelEquipped']."' WHERE uniquekey = '".$uniquekey."'";
 $result = $db->sql_query($query);
 
-echo "<pre>";
-print_r($gear);
-echo "</pre>";
+// echo "<pre>";
+// print_r($gear);
+// echo "</pre>";
