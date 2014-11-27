@@ -34,7 +34,7 @@ $armory->setCharactersCacheTTL($WGPConfig['Cache']);
 $CharacterData = $armory->getCharacter($Character);
 $gear = $CharacterData->getGear();
 
-if(is_numeric($gear['averageItemLevelEquipped']))
+if($gear['averageItemLevelEquipped'] != '')
 {
 	$query = "UPDATE " . $TableNames['roster'] . " SET iLevel = '".$gear['averageItemLevelEquipped']."' WHERE uniquekey = '".$uniquekey."'";
 	$result = $db->sql_query($query);
