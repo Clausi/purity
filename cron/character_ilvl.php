@@ -17,7 +17,9 @@ if( ! is_array($gear))
 
 if($gear['averageItemLevelEquipped'] != '')
 {
-	$query = "UPDATE " . $TableNames['roster'] . " SET iLevel = '".$gear['averageItemLevelEquipped']."' WHERE uniquekey = '".$uniquekey."'";
+	$query = "UPDATE " . $TableNames['roster'] . " SET 
+		iLevel = CASE WHEN iLevel = 0 OR iLevel < '".$gear['averageItemLevelEquipped']."' THEN '".$gear['averageItemLevelEquipped']."' ELSE iLevel END
+		WHERE uniquekey = '".$uniquekey."'";
 	$result = $db->sql_query($query);
 	echo "<br />ilvl: ".$gear['averageItemLevelEquipped'];
 }
