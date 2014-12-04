@@ -245,7 +245,7 @@ foreach($raidresult as $raid){
 
 			if(array_key_exists($mode, $boss)) {
 				if($boss[$mode]['count'] >= $WGPConfig['CharacterMatch']) {
-					$query = "SELECT COUNT(id) as count_id FROM " .$TableNames['progressbosses']. " WHERE bossid = '".$boss['id']."' AND mode='".$mode."' LIMIT 1";
+					$query = "SELECT COUNT(id) as count_id FROM " .$TableNames['progressbosses']. " WHERE bossid = '".$boss['id']."' AND mode='".$modeId."' LIMIT 1";
 					$result = $db->sql_query($query);
 					if($db->sql_fetchfield('count_id') == 0) {
 						$insertQuery = "INSERT INTO " .$TableNames['progressbosses']. " SET
