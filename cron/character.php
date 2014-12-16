@@ -10,7 +10,7 @@ include($phpbb_root_path . 'guild/includes/functions.' . $phpEx);
 include($phpbb_root_path . 'guild/includes/wowarmoryapi.' . $phpEx);
 
 
-$query = "SELECT uniquekey, name, realm FROM " . $TableNames['roster'] . " WHERE active = '1' ORDER BY lastupdate ASC LIMIT 1";
+$query = "SELECT uniquekey, name, realm FROM " . $TableNames['roster'] . " WHERE active = '1' AND level >= ".$maxLevel." ORDER BY lastupdate ASC LIMIT 1";
 $result = $db->sql_query($query);
 $row = $db->sql_fetchrow($result);
 $Character = $row['name'];
@@ -20,7 +20,7 @@ echo $Character;
 echo "<br />";
 
 $realm = $row['realm'];
-if($realm == NULL) $realm = $GuildRealm;
+if($realm == NULL || $realm == '') $realm = $GuildRealm;
 
 echo $realm;
 echo "<br />";

@@ -32,6 +32,7 @@ $TableNames = array(
 // Level anzeigen
 $showLevel = true;
 $showiLevel = true;
+$maxLevel = 100;
 
 // Rang anzeigen
 $showRank = false;
