@@ -31,13 +31,13 @@ while($raid = $db->sql_fetchrow($result)) {
 	while($boss = $db->sql_fetchrow($result2)) {
 		if($boss['mode'] == 2) {
 			$template->assign_block_vars('n_raidprogress.n_hckills', array(
-				'BOSSNAME' => $boss['name'],
+				'BOSSNAME' => stripslashes($boss['name']),
 				'KILLDATE' => date('d.m.Y', $boss['killdate']),
 			));
 		}
 		else if ($boss['mode'] == 3) {
 			$template->assign_block_vars('n_raidprogress.n_mythickills', array(
-				'BOSSNAME' => $boss['name'],
+				'BOSSNAME' => stripslashes($boss['name']),
 				'KILLDATE' => date('d.m.Y', $boss['killdate']),
 			));
 		}
