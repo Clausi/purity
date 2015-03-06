@@ -141,7 +141,7 @@ $result = $db->sql_query($query);
 // Get all Killdates and Killcounts
 $raidprogress = array();
 while($row = $db->sql_fetchrow($result)) {
-	if(in_array($row['raidid'], $WGPConfig['Freeze']) == false) { // Exclude freezed raidzones
+	if(in_array($row['raidid'], $WGPConfig['Freeze']) == false && in_array($row['raidid'], $WGPConfig['Raids']) == true) { // Exclude freezed raidzones and only process shown raids
 		$raidprogress[$row['raidid']] = array();
 		$raidprogress[$row['raidid']]['id'] = $row['raidid'];
 		$raidprogress[$row['raidid']]['name'] = $row['raidname'];
