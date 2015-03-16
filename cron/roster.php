@@ -15,9 +15,9 @@ $armory->UTF8(TRUE);
 $guild = $armory->getGuild($GuildName);
 $members = $guild->getMembers();
 
-echo "<pre>";
-print_r($members);
-echo "</pre>";
+// echo "<pre>";
+// print_r($members);
+// echo "</pre>";
 
 if( ! is_array($members)) 
 {
